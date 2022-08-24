@@ -9,6 +9,7 @@ import db
 
 # convert staging table values
 # create queries of data
+# map phone numbers to contacts with Google People API
 # create UI to display results
 # enforce pipeline to stream data from google fi into db into data graphs
 

@@ -23,7 +23,30 @@ def execute_query(query):
         # print (str(row[0]) + " " + str(row[1]))
         row = cursor.fetchone()
 
-def create_table():
+def create_staging_table():
+  # CREATE TABLE Calls (
+  #   ID INTEGER PRIMARY KEY,
+  #   Number VARCHAR(50) NOT NULL,
+  #   Date DATE NOT NULL,
+  #   Time TIME NOT NULL,
+  #   Type VARCHAR(50) NOT NULL,
+  #   Duration SMALLINT NOT NULL
+  # )
+  # ;
+
+  # CREATE TABLE Messages (
+  #   ID INTEGER PRIMARY KEY,
+  #   Number VARCHAR(50) NOT NULL,
+  #   Date DATE NOT NULL,
+  #   Time TIME NOT NULL,
+  #   Type VARCHAR(50) NOT NULL
+  # )
+  # ;
+  
+  # INSERT INTO [dbo].[Messages] (ID, Number, Date, Time, Type)
+  # SELECT * FROM [dbo].[FiHistoryStaging]
+  # WHERE type="Received text" OR type="Sent text"
+
   query_str = """CREATE TABLE FiHistoryStaging
     (
       Date VARCHAR(50) NOT NULL,
@@ -45,3 +68,12 @@ def drop_table():
 def view_table():
   query_str = "SELECT TOP (25) * FROM FiHistoryStaging"
   execute_query(query_str)
+
+# number of calls/texts total every month
+# heatmap of phone activity
+# most commonly missed number
+# most commonly called (incoming) number
+# most commonly called (outgoing) number
+# most commonly texted (sender) number
+# most commonly texted (receiver) number
+# average length of call
