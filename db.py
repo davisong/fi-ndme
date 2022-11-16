@@ -35,7 +35,8 @@ def create_staging_table():
   # ;
 
   # CREATE TABLE Messages (
-  #   ID INTEGER PRIMARY KEY,
+  #   ID INTEGER IDENTITY(1,1) NOT NULL PRIMARY KEY CLUSTERED,
+  #   MessageID AS 'MID' + RIGHT('00000000' + CAST(ID AS VARCHAR(8)), 8) PERSISTED, 
   #   Number VARCHAR(50) NOT NULL,
   #   Date DATE NOT NULL,
   #   Time TIME NOT NULL,
@@ -43,9 +44,11 @@ def create_staging_table():
   # )
   # ;
   
+  # https://www.mssqltips.com/sqlservertip/1145/date-and-time-conversions-using-sql-server/
   # INSERT INTO [dbo].[Messages] (ID, Number, Date, Time, Type)
   # SELECT * FROM [dbo].[FiHistoryStaging]
   # WHERE type="Received text" OR type="Sent text"
+  # select convert(varchar, getdate(), 107)
 
   query_str = """CREATE TABLE FiHistoryStaging
     (

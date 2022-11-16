@@ -1,6 +1,5 @@
 import csv
 import pandas
-
 import db
 
 # https://www.rootstrap.com/blog/how-to-manage-your-python-projects-with-pipenv-pyenv/
@@ -19,9 +18,14 @@ def main():
   #   for row in reader:
   #     print(f'date: {row["Date (-04:00)"]}\ttime: {row["Time (-04:00)"]}\tphone: {row["Phone #"]}\ttype: {row["Type"]}')
 
-  # df = pandas.read_csv("FiHistory2018-07-2022-08.csv")
-  # print(df)
-  db.view_table()
+  df = pandas.read_csv("FiHistory2018-07-2022-08.csv")
+  # for each row of the data frame, process data to insert into SQL database
+  # for each number in Phone # col, create new row w/ number val
+  # date should be in YYYY-MM-DD w/ time in HH:MM:SS
+  # duration in seconds
+  # type is same
+  print(df)
+  # db.view_table()
 
 if __name__ == "__main__":
   main()
