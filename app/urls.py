@@ -4,5 +4,6 @@ from . import views
 
 app_name = 'app'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.index, name='index'),
+    path('upload_csv/', views.upload_csv, name='upload_csv'),
 ]
