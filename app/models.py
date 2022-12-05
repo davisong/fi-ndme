@@ -14,6 +14,10 @@ class CommonInfo(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        # maybe I should concat the id/date to differentiate calls/texts?
+        return self.phone_number
+
 
 class PhoneCall(CommonInfo):
     id = models.BigAutoField(primary_key=True)
