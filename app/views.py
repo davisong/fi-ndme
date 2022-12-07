@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from io import TextIOWrapper
+from csv import DictReader
 # import pandas as pd
 
 from .forms import CSVFileForm
@@ -15,6 +17,12 @@ def index(request):
     return render(request, template_name, context)
 
 
+# input validation:
+# check if it's a CSV file
+# check that the data is formatted properly
+# check that the data is encoded properly
+# check that the data is in the correct form
+
 def upload_csv(request):
     if request.method == 'POST':
         form = CSVFileForm(request.POST, request.FILES)
@@ -27,7 +35,12 @@ def upload_csv(request):
     return render(request, 'app/index.html', {'form': form})
 
 
+# may need to consider the maximum file size that a GoogleFi CSV file can be
+# may need to optimize reading in from file by not storing to disk?
 def handle_uploaded_file(f):
-    with open('name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)
+    # converts files in binary mode (django default) to a text stream
+    # that CSV module can read. assumes file encoded in utf-8, need
+    # newline option to parse linebreaks in quoted fields
+    rows = TextIOWrapper(f, encoding="utf-8", newline="")
+    for row in DictReader(rows):
+        print(row)
